@@ -57,7 +57,7 @@ function sdate() {
     $ordmday = ordinal_suffix($mday);
     
     if (!isset($holiday)) return "Today is $wday, the $ordmday day of $month in the year $year, by Shire Reckoning.\r\n";
-    else if (!isset($shd)) return "Celebrate $wday, the $ordmday day of $holiday in the year $year, by Shire Reckoning.\r\n";
+    else if (!isset($shd)) return "Today is $wday, celebrate the $ordmday day of $holiday in the year $year, by Shire Reckoning.\r\n";
     else return "Celebrate $holiday in the year $year, by Shire Reckoning.\r\n";
 }
 
