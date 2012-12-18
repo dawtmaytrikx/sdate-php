@@ -42,7 +42,6 @@ function sdate() {
     if ($daynum > 181) $mdaynum--;
     if (($daynum > 182) && ($leap = 1)) $mdaynum--;
     if ($daynum > 183) $mdaynum--;
-    
     $mday = $mdaynum % 30 + 1;
     
     $year = date('Y', ($time + 10*24*60*60)) - 1958 + 1418 + 6000;
