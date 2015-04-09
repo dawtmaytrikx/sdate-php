@@ -12,13 +12,16 @@ function ordinal_suffix($number) { //thx to http://stackoverflow.com/users/34962
     else { return $number.$ends[$number % 10]; }
 }
 
-function sdate() {
+function sdate($time = 0) {
     $wdays = array('Sterday', 'Sunday', 'Monday', 'Trewsday', 'Hevensday', 'Mersday', 'Highday');
     $months = array('Afteryule', 'Solmath', 'Rethe', 'Astron', 'Thrimidge', 'Forelithe', 'Afterlithe', 'Wedmath', 'Halimath', 'Winterfilth', 'Blotmath', 'Foreyule');
     $holidays = array('Yule', 'Lithe', 'Mid-year\'s day', 'Overlithe');
     
-    $time = time();
-    #$time = mktime(1,1,1,6,21,2011); //for debugging
+    if (!$time) {
+        $time = time();
+    } else {
+        $time = strtotime($time);
+    }
     $daynum = date('z', $time) + 10;
     
     if (date('L', $time)) {
@@ -55,10 +58,20 @@ function sdate() {
     if (!isset($holiday)) $month = $months[floor($mdaynum / 30)];
     $ordmday = ordinal_suffix($mday);
     
-    if (!isset($holiday)) return "Today is $wday, the $ordmday day of $month in the year $year, by Shire Reckoning.\r\n";
-    else if (!isset($shd)) return "Today is $wday, celebrate the $ordmday day of $holiday in the year $year, by Shire Reckoning.\r\n";
-    else return "Celebrate $holiday in the year $year, by Shire Reckoning.\r\n";
+    if (!isset($holiday)) return "Today is $wday, the $ordmday day of $month in the year $year, by Shire-reckoning.\r\n";
+    else if (!isset($shd)) return "Celebrate $wday, the $ordmday day of $holiday in the year $year, by Shire-reckoning.\r\n";
+    else return "Celebrate $holiday in the year $year, by Shire-reckoning.\r\n";
 }
+
+/* DEBUG
+    $date = '2011-12-22';
+    $end_date = '2012-12-21';
+
+    while (strtotime($date) <= strtotime($end_date)) {
+        echo sdate($date);
+        $date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));
+    }
+*/
 
 echo sdate();
 exit(0);
